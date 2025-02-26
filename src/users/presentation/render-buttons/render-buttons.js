@@ -4,6 +4,7 @@
  */
 
 import usersStore from "../../store/users-store";
+import { renderTable } from "../render-table/render-table";
 import "./render-buttons.css";
 export const renderButtons = (element) => {
   const nextButton = document.createElement("button");
@@ -13,8 +14,14 @@ export const renderButtons = (element) => {
   previousButton.innerText = "< Prev";
 
   const currentPageLabel = document.createElement("span");
-  currentPageLabel.innerText = usersStore.getCurrentPage;
+  currentPageLabel.innerText = usersStore.getCurrentPage();
   currentPageLabel.id = "current-page";
 
   element.append(previousButton, currentPageLabel, nextButton);
+
+  nextButton.addEventListener("click", async () => {
+    await usersStore.loadNextPage();
+    currentPageLabel.innerText = usersStore.getCurrentPage();
+    renderTable(element);
+  });
 };
