@@ -24,4 +24,9 @@ export const renderButtons = (element) => {
     currentPageLabel.innerText = usersStore.getCurrentPage();
     renderTable(element);
   });
+  previousButton.addEventListener("click", async () => {
+    await usersStore.loadPreviousPage();
+    currentPageLabel.innerText = usersStore.getCurrentPage();
+    renderTable(element);
+  });
 };

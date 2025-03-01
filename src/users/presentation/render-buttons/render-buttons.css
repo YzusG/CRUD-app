@@ -5,4 +5,5 @@ button {
 #current-page {
   font-size: 1.3rem;
   color: white !important;
+  margin: 10px;
 }
